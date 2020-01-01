@@ -9,7 +9,9 @@ from tools.alerts import SlackAlerter
 
 class SlowQuery(object):
 	def __init__(self):
-		self.date = r"\d{6}\s+\d{1,2}:\d{2}:\d{2}"
+		#self.date reges support both "180708 11:01:11" and "2019-12-23T15:46:47.441141Z" date formats for mysql 5.7 & earlier
+		self.date = r"([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])[A-Za-z])(
+		            [01]?[0-9]|2[0-3]):[0-5][0-9]|\d{6}\s+\d{1,2}:\d{2}:\d{2}"
 		self.host = re.compile(r"#\s+User@Host:\s+"
                          r"(?:([\w\d]+))?\s*"
                          r"\[\s*([\w\d]+)\s*\]\s*"
